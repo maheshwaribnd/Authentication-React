@@ -1,0 +1,46 @@
+body {
+    background-image: url(/Auntenticate-img.jpg);
+    background-repeat: no-repeat;
+    /* background-color: black; */
+}
+#container {
+    display: block;
+    width: 750px;
+    margin: auto;
+    text-align: left;
+    margin-top: 1.5%;
+    color: rgb(249, 246, 246);
+    text-shadow: 1px 1px 2px;
+    border: 2px solid rgb(82, 80, 80);
+    background-color: transparent;
+    box-shadow: 3px 3px 18px rgb(130, 79, 79);
+    border-radius: 25px;
+    padding: 2%;
+}
+
+#container input {
+    text-align: left;
+    border: none;
+    color: rgb(224, 217, 217);
+    border-bottom: 2px solid gray;
+    outline: none;
+    letter-spacing: 1px;
+    font-size: 20px;
+    font-weight: bold;
+    background: transparent;
+    margin: 45px 6px;
+}
+
+#container h1 {
+    text-align: center;
+}
+
+#container Button {
+    display: block;
+    margin: auto;
+    font-size: larger;
+    background-color: rgb(19, 18, 18);
+}
+#container Button:hover{
+    background-color: rgb(35, 31, 31);
+}

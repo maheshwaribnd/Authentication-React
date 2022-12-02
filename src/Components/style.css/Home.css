@@ -1,0 +1,15 @@
+.home {
+    width: 80%;
+    margin: auto;
+    color: white;
+}
+
+.description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border: 2px solid grey;
+    box-shadow: 1px 1px 12px rgb(130, 79, 79);
+    border-radius: 5px;
+}
