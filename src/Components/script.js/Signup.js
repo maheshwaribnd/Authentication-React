@@ -29,9 +29,6 @@ const SignUpPage = () => {
         // navigate('/profile')
         e.preventDefault();
 
-        // const { FullName, Email, Password, ConfirmPassword } = userData;
-        // console.log(FullName.length)
-
         if (userData.FullName.length >= 3) {
             setError((previousError) => ({
                 ...previousError,
@@ -103,7 +100,6 @@ const SignUpPage = () => {
             error.ConfirmPassword === false)
             {
             navigate('/profile')
-
         }
     }
 
