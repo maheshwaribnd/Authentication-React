@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button, Form, Alert } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';             
+import { useNavigate } from 'react-router-dom';
 import '../style.css/SignUp.css'
 
 const SignUpPage = () => {
@@ -13,10 +13,10 @@ const SignUpPage = () => {
     })
 
     const [error, setError] = useState({
-        FullName: false,
-        Email: false,
-        Password: false,
-        ConfirmPassword: false
+        FullName: true,
+        Email: true,
+        Password: true,
+        ConfirmPassword: true
     })
 
     const [submit, setSubmit] = useState(false)
@@ -26,33 +26,33 @@ const SignUpPage = () => {
 
     const Submit = (e) => {
 
-        navigate('/profile')
+        // navigate('/profile')
         e.preventDefault();
 
-        const { FullName, Email, Password, ConfirmPassword } = userData;
-        console.log(FullName.length)
+        // const { FullName, Email, Password, ConfirmPassword } = userData;
+        // console.log(FullName.length)
 
-        if (FullName.length >= 3) {
-            console.log('hi')
+        if (userData.FullName.length >= 3) {
             setError((previousError) => ({
                 ...previousError,
                 FullName: false
             }))
+            console.log(error.FullName);
         }
         else {
-            console.log('mahi')
             setError((previousError) => ({
                 ...previousError,
                 FullName: true
             }))
+            console.log(error.FullName);
         }
         console.log(error)
 
         if (
-            Email.includes("@") &&
-            Email.includes(".") &&
-            Email.indexOf("@") != 0 &&
-            Email.length - Email.lastIndexOf(".") >= 3
+            userData.Email.includes("@") &&
+            userData.Email.includes(".") &&
+            userData.Email.indexOf("@") != 0 &&
+            userData.Email.length - userData.Email.lastIndexOf(".") >= 3
         ) {
             setError((previousError) => ({
                 ...previousError,
@@ -66,7 +66,7 @@ const SignUpPage = () => {
             }))
         }
 
-        if (Password.length >= 6) {
+        if (userData.Password.length >= 6) {
             setError((previousError) => ({
                 ...previousError,
                 Password: false
@@ -79,7 +79,7 @@ const SignUpPage = () => {
             }))
         }
 
-        if (ConfirmPassword === Password) {
+        if (userData.ConfirmPassword === userData.Password && userData.ConfirmPassword.length >= 6) {
             setError((previousError) => ({
                 ...previousError,
                 ConfirmPassword: false
@@ -92,11 +92,19 @@ const SignUpPage = () => {
             }))
         }
 
-        window.localStorage.setItem("uesrData",JSON.stringify(userData));
-        setUserData({...userData, random: (Math.random()+' ').substring(2,10)+(Math.random()+' ').substring(2,10)});
+        window.localStorage.setItem("uesrData", JSON.stringify(userData));
+        setUserData({ ...userData, random: (Math.random() + ' ').substring(2, 10) + (Math.random() + ' ').substring(2, 10) });
         console.log(userData);
-        // navigate('/profile')
-        
+
+        console.log(error)
+        if( error.FullName === false &&
+            error.Email === false &&
+            error.Password === false &&
+            error.ConfirmPassword === false)
+            {
+            navigate('/profile')
+
+        }
     }
 
     return (
@@ -119,14 +127,7 @@ const SignUpPage = () => {
                             })
                         }
                     />
-                    {submit && !success && (error.FullName ?
-                        <Form.Control.Feedback type="invalid">
-                            Please Enter a valid FullName.
-                        </Form.Control.Feedback> :
-                        <Form.Control.Feedback type="valid">
-                            Looks good!
-                        </Form.Control.Feedback>
-                    )}
+                    {error.FullName ? <p> Please Enter a valid FullName.</p> : null}
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -142,14 +143,7 @@ const SignUpPage = () => {
                             })
                         }
                     />
-                    {submit && !success && (error.Email ?
-                        <Form.Control.Feedback type="invalid">
-                            Please Enter a valid Email.
-                        </Form.Control.Feedback> :
-                        <Form.Control.Feedback type="valid">
-                            Looks good!
-                        </Form.Control.Feedback>
-                    )}
+                    {error.Email ? <p> Please Enter a valid Email.</p> : null}
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -165,14 +159,7 @@ const SignUpPage = () => {
                             })
                         }
                     />
-                    {submit && !success && (error.Password ?
-                        <Form.Control.Feedback type="invalid">
-                            Password should contain a 6 character
-                        </Form.Control.Feedback> :
-                        <Form.Control.Feedback type="valid">
-                            Looks good!
-                        </Form.Control.Feedback>
-                    )}
+                    {error.Email ? <p> Password should contain a 6 character</p> : null}
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -188,14 +175,7 @@ const SignUpPage = () => {
                             })
                         }
                     />
-                    {submit && !success && (error.Password ?
-                        <Form.Control.Feedback type="invalid">
-                            Password does not match !
-                        </Form.Control.Feedback> :
-                        <Form.Control.Feedback type="valid">
-                            Looks good!
-                        </Form.Control.Feedback>
-                    )}
+                    {error.Email ? <p> Password does not match !</p> : null}
                 </Form.Group>
 
                 <Button variant="dark" type='button' onClick={Submit}>SignUp</Button>
